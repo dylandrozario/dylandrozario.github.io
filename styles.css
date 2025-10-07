@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     overflow: hidden;
     height: 100vh;
     position: relative;
@@ -23,16 +23,29 @@ body {
     z-index: -2;
 }
 
+/* Lightweight animated diamond pattern (GPU-friendly) */
+.background-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Tiny SVG tile for diamonds */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><rect x='11' y='1' width='2' height='22' fill='none'/><polygon points='12,0 24,12 12,24 0,12' fill='none' stroke='%23cccccc' stroke-width='1' opacity='0.6'/></svg>");
+    background-size: 24px 24px;
+    background-repeat: repeat;
+    opacity: 0.35;
+    animation: bgMove 12s linear infinite;
+    will-change: background-position;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 24px 24px; }
+}
+
 /* Diamond grid animation */
 .diamond-grid {
-    position: fixed;
-    top: -200vh;
-    left: -200vw;
-    width: 500vw;
-    height: 500vh;
-    z-index: -1;
-    animation: moveDiagonal 6s linear infinite;
-    will-change: transform;
+    /* Disabled for performance (Chrome) – CSS tiled bg handles visuals */
+    display: none;
 }
 
 .diamond {
@@ -54,6 +67,14 @@ body {
     100% {
         transform: translate3d(24px, 24px, 0);
     }
+}
+
+/* Mobile: use lightweight CSS background only */
+@media (max-width: 768px) {
+    /* Disable all animations and transitions on mobile for performance */
+    * { animation: none !important; transition: none !important; }
+    .diamond-grid { display: none; }
+    .background-container::before { animation: none; }
 }
 
 /* Content styling */
@@ -143,7 +164,9 @@ body {
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    backdrop-filter: blur(2px);
+    /* Remove backdrop blur (expensive on Chrome) */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center;
 }
