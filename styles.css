@@ -75,6 +75,10 @@ body {
     * { animation: none !important; transition: none !important; }
     .diamond-grid { display: none; }
     .background-container::before { animation: none; }
+    /* Allow vertical scrolling on mobile */
+    html, body { height: auto; }
+    body { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .content { padding-top: 24px; }
 }
 
 /* Content styling */
