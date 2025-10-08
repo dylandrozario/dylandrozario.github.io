@@ -203,8 +203,8 @@ body {
 #aboutmeFile.expanded,
 #interestsFile.expanded {
     width: 100%;
-    height: 60vh;
-    min-height: 440px;
+    height: 68vh;
+    min-height: 520px;
 }
 
 .ascii-file::before {
