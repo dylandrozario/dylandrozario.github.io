@@ -33,7 +33,7 @@ body {
     background-size: 24px 24px;
     background-repeat: repeat;
     opacity: 0.35;
-    animation: bgMove 9s linear infinite;
+    animation: bgMove 5s linear infinite;
     will-change: background-position;
 }
 
