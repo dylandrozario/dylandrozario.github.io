@@ -11,6 +11,16 @@ body {
     height: 100vh;
     position: relative;
 }
+.banner {
+  position: relative;
+  background-image: url("fool.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.banner h1{
+    color: white;
+}
 
 /* Background with hexagonal grid pattern */
 .background-container {
